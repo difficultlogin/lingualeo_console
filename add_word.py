@@ -17,12 +17,14 @@ else:
 		translate_obj = json.loads(translate.read().decode('utf-8'))
 		word = translate_obj['translation']
 
+word = word.replace(' ', '+')
 url = 'http://lingualeo.com/ru/userdict3/getTranslations?word_value=%s&groupId=&_=1454259456529' % word
 response = urllib.request.urlopen(url)
 response_str = response.read().decode('utf-8')
 response_obj = json.loads(response_str)
 
 translate_value = response_obj['userdict3']['translations'][0]['translate_value']
+clear_word = response_obj['userdict3']['word_value']
 
 data_word = {
 	'word_id' : response_obj['userdict3']['word_id'],
@@ -30,7 +32,7 @@ data_word = {
 	'groupId' : 'dictionary',
 	'translate_id' : response_obj['userdict3']['translations'][0]['translate_id'],
 	'translate_value' : translate_value,
-	'user_word_value' : word,
+	'user_word_value': clear_word,
 	'from_syntrans_id' : '',
 	'to_syntrans_id' : '',
 }
@@ -40,4 +42,5 @@ headers = {
 }
 
 add_word = session.post('http://lingualeo.com/userdict3/addWord', data=data_word, headers=headers)
-print(translate_value)
+
+print(translate_value, ' => ', clear_word)
