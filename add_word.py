@@ -42,4 +42,4 @@ headers = {
 
 add_word = session.post('http://lingualeo.com/userdict3/addWord', data=data_word, headers=headers)
 
-print(translate_value, ' \n\n', clear_word)
+print(translate_value, '\n\n', clear_word)
