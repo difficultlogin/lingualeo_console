@@ -1,1 +1,1 @@
-# lingualeo_console
+# lingualeo terminal
